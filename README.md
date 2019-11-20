@@ -1,8 +1,6 @@
-# CoffeeHub
+# Book Reading Companion
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
-
-![](coffee-hub.png)
 
 ## Development server
 
