@@ -12,7 +12,7 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
     @Output() closeDialog = new EventEmitter();
     @ViewChild('searchField') searchField: ElementRef;
 
-    results = [];
+    results = undefined;
     previousQuery = '';
     previousSubscription;
 
@@ -44,6 +44,8 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
         }
         if (query !== this.previousQuery) {
             this.previousQuery = query;
+        } else {
+            return;
         }
 
         if (!!this.previousSubscription) {
@@ -76,7 +78,9 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
 
                     this.results = returnResults;
                     console.log(this.results);
-                }
+                } else {
+                    this.results = [];
+                }                    
             });
     }
 

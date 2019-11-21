@@ -1,7 +1,4 @@
 div.results-item{
-    text-align: center;
-    font-weight: bold;
-    color: #ccc;
     width: 182px;
     height: 273px;
     border: 2px solid #ccc;
@@ -16,6 +13,12 @@ div.results-item img {
 }
 
 div.default {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
     padding: 20px;
     font-size: 20px;
+    background: #ccc;
+    color: #fff;
 }

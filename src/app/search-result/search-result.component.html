@@ -1,4 +1,7 @@
 <div id="results-wrapper">
+    <div *ngIf="!!results && results.length === 0">
+        <span id="no-results">No results.</span>
+    </div>
     <div class="results-item" *ngFor="let book of results">
         <img *ngIf="!!book.thumbnailUrl" class="thumbnail" src="{{book.thumbnailUrl}}" alt="{{book.title}} {{getAuthors(book)}}" />
         <div class="default" *ngIf="!book.thumbnailUrl">
