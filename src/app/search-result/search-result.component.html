@@ -1,11 +1,18 @@
 <div id="results-wrapper">
     <div *ngIf="!!results && results.length === 0">
-        <span id="no-results">No results.</span>
+        <span>No results.</span>
     </div>
-    <div class="results-item" *ngFor="let book of results">
-        <img *ngIf="!!book.thumbnailUrl" class="thumbnail" src="{{book.thumbnailUrl}}" alt="{{book.title}} {{getAuthors(book)}}" />
-        <div class="default" *ngIf="!book.thumbnailUrl">
-            <span>{{book.title}} {{getAuthors(book)}}</span>
+    <ng-container *ngIf="isLoading">
+        <div *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14]" class="results-placeholder-wrapper">
+            <div class="results-placeholder"></div>
         </div>
+    </ng-container>
+    <div class="results-item" *ngFor="let book of results">
+        <img (click)="onBookClick(book)" *ngIf="!!book.thumbnailUrl" class="thumbnail pointer" src="{{book.thumbnailUrl}}" alt="{{book.title}} {{book.authors}}" />
+        <div (click)="onBookClick(book)" class="default pointer" *ngIf="!book.thumbnailUrl">
+            <span>{{book.title}}</span>
+        </div>
+        <div class="book-title ellipsis" title="{{book.title}}">{{book.title}}</div>
+        <div class="book-author ellipsis" title="{{book.authors}}">{{book.authors}}</div>
     </div>
 </div>

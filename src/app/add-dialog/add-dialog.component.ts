@@ -12,6 +12,7 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
     @Output() closeDialog = new EventEmitter();
     @ViewChild('searchField') searchField: ElementRef;
 
+    isLoading = false;
     results = undefined;
     previousQuery = '';
     previousSubscription;
@@ -40,10 +41,11 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
         const query = `${encodeURI(event.target.value)}`;
         const url = `https://openlibrary.org/search.json?q=${query}&mode=ebooks`;
         if (query === '') {
-            this.results = [];
+            this.results = undefined;
         }
         if (query !== this.previousQuery) {
             this.previousQuery = query;
+            this.results = undefined;
         } else {
             return;
         }
@@ -52,6 +54,7 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
             this.previousSubscription.unsubscribe();
         }
 
+        this.isLoading = true;
         this.previousSubscription = this.http.get(url)
             .subscribe( (res: any) => {
                 if (res && res.docs && res.docs.length) {
@@ -59,19 +62,24 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
 
                     res.docs.forEach((book: any) => {
                         let thumbnailUrl = '';
-                        if (book && book.isbn && book.isbn.length) {
+                        const hasIsbn = book.isbn && book.isbn.length;
+                        const hasAuthors = book.author_name && book.author_name.length;
+                        if (book && hasIsbn && hasAuthors) {
                             const isbn = book.isbn[0];
                             const url2 = `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json`;
                             this.http.get(url2).subscribe((bookDetails: any) => {
                                 const details = bookDetails[`ISBN:${isbn}`];
-                                thumbnailUrl = this.getMediumThumbnail(details.thumbnail_url);
+                                thumbnailUrl = this.getHighRes(details.thumbnail_url, 'M');
                                 returnResults.push({
-                                    authors: book.author_name,
-                                    title: book.title,
+                                    authors: this.getAuthors(book.author_name),
+                                    title: this.getTitleCase(book.title),
                                     isbn: book.isbn,
+                                    book,
                                     thumbnailUrl
                                 });
                             });
+                        } else {
+                            console.log(`ISBN: ${book.isbn}, authors: ${book.author_name}`, book);
                         }
 
                     });
@@ -80,12 +88,52 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
                     console.log(this.results);
                 } else {
                     this.results = [];
-                }                    
+                }
+            }, err => {},
+            () => {
+                this.isLoading = false;
             });
+    }
+
+    private getLargeThumbnail(url: string): string {
+        return url ? url.replace('-S.', '-L.') : '';
     }
 
     private getMediumThumbnail(url: string): string {
         return url ? url.replace('-S.', '-M.') : '';
     }
 
+    private getHighRes(url: string, size: string): string {
+        return url ? url.replace('-S.', `-${size}.`) : '';
+    }
+
+    private getAuthors(authors) {
+        let authorString = '';
+
+        if (!authors) {
+            return '';
+        }
+
+        if (authors.length === 1) {
+            authorString = authors[0];
+        }
+
+        if (authors.length > 1) {
+            for (let i = 0; i < authors.length; i++) {
+                authorString += authors[i];
+                if (i <= authors.length - 2) {
+                    authorString += ', ';
+                }
+                if (i === authors.length - 2) {
+                    authorString += 'and ';
+                }
+            }
+        }
+        return authors ? authorString : ``;
+    }
+
+    private getTitleCase(title: string): string {
+        // TODO: return title case
+        return title;
+    }
 }

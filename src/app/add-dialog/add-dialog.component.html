@@ -4,6 +4,6 @@
     <div class="modal-content">
         <span class="close" (click)="onCloseClick()">&times;</span>
         <input #searchField (keyup)="search($event)" placeholder="e.g. Harry Potter" />
-        <app-search-result [results]="results"></app-search-result>
+        <app-search-result [isLoading]="isLoading" [results]="results"></app-search-result>
     </div>
 </div>

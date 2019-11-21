@@ -1,24 +1,56 @@
-div.results-item{
+div.results-item,
+div.results-placeholder-wrapper {
     width: 182px;
-    height: 273px;
-    border: 2px solid #ccc;
+    height: 317.5px;
     float: left;
-    margin: 0 10px 10px 0;
+    margin: 15px 20px 15px 0;
 }
 
-div.results-item img {
+div.results-placeholder {
+    animation: fading 1.5s infinite;
+    background: black;
+}
+
+div.results-item img,
+div.results-placeholder,
+div.default {
     width: 180px;
     height: 271px;
     object-fit: cover;
+    background-image: linear-gradient(to top right, #111, #222, #222, #111);
+    border-radius: 5px;
 }
 
 div.default {
-    height: 100%;
-    width: 100%;
     text-align: center;
     font-weight: bold;
-    padding: 20px;
+    padding: 30px 15px;
     font-size: 20px;
-    background: #ccc;
-    color: #fff;
+    color: #ccc;
+    font-family: Georgia,"Palatino Linotype","Book Antiqua",Palatino,serif;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+div.book-title {
+    text-align: center;
+    font-weight: bold;
+}
+div.book-author {
+    text-align: center;
+    font-size: small;
+}
+
+@keyframes fading {
+  0% {
+    opacity: .1;
+  }
+  
+  50% {
+    opacity: .2;
+  }
+  
+  100% {
+    opacity: .1;
+  }
 }

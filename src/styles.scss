@@ -1,5 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
-.pointer-finger {
+html, body {
+    background: #333;
+    color: white;
+}
+
+.ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.pointer {
     cursor: pointer;
 }
