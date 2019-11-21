@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +14,7 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { OrdersService } from './shared/orders.service';
 import { AddComponent } from './add/add.component';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,11 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
     OrdersComponent,
     OrderListComponent,
     AddComponent,
-    AddDialogComponent
+    AddDialogComponent,
+    SearchResultComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

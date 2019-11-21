@@ -4,7 +4,7 @@
     <div class="modal-content">
         <!--span class="close" (click)="onCloseClick()">&times;</span-->
         <input (keyup)="search($event)" placeholder="e.g. Harry Potter" />
-        <div id="results-wrapper"></div>
+        <app-search-result [results]="results"></app-search-result>
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat" (click)="onCloseClick()">Close</a>
