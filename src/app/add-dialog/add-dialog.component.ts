@@ -48,14 +48,35 @@ export class AddDialogComponent implements OnInit {
         this.previousSubscription = this.http.get(url)
             .subscribe( (res: any) => {
                 if (res && res.docs && res.docs.length) {
-                    this.results = res.docs.map((book: any) => ({
-                        authors: book.author_name,
-                        title: book.title,
-                        isbn: book.isbn
-                    }));
+                    const returnResults = [];
+
+                    res.docs.forEach((book: any) => {
+                        let thumbnailUrl = '';
+                        if (book && book.isbn && book.isbn.length) {
+                            const isbn = book.isbn[0];
+                            const url2 = `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json`;
+                            this.http.get(url2).subscribe((bookDetails: any) => {
+                                const details = bookDetails[`ISBN:${isbn}`];
+                                thumbnailUrl = this.getMediumThumbnail(details.thumbnail_url);
+                                returnResults.push({
+                                    authors: book.author_name,
+                                    title: book.title,
+                                    isbn: book.isbn,
+                                    thumbnailUrl
+                                });
+                            });
+                        }
+
+                    });
+
+                    this.results = returnResults;
                     console.log(this.results);
                 }
             });
+    }
+
+    private getMediumThumbnail(url: string): string {
+        return url ? url.replace('-S.', '-M.') : '';
     }
 
 }

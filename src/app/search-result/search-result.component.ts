@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-search-result',
@@ -8,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SearchResultComponent implements OnInit {
     @Input() results = [];
 
-    constructor() { }
+    constructor(private http: HttpClient) { }
 
     ngOnInit() {
     }
