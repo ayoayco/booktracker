@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -6,10 +6,11 @@ import { HttpClient } from '@angular/common/http';
     templateUrl: './add-dialog.component.html',
     styleUrls: ['./add-dialog.component.scss']
 })
-export class AddDialogComponent implements OnInit {
+export class AddDialogComponent implements AfterViewInit, OnInit {
 
     @Input() isOpen = false;
     @Output() closeDialog = new EventEmitter();
+    @ViewChild('searchField') searchField: ElementRef;
 
     results = [];
     previousQuery = '';
@@ -17,6 +18,10 @@ export class AddDialogComponent implements OnInit {
 
     constructor(private http: HttpClient) { }
     ngOnInit() {
+    }
+
+    ngAfterViewInit() {
+        this.searchField.nativeElement.focus();
     }
 
     getDisplay() {
@@ -33,7 +38,7 @@ export class AddDialogComponent implements OnInit {
 
     search(event: any) {
         const query = `${encodeURI(event.target.value)}`;
-        const url = `https://openlibrary.org/search.json?q=${query}&limit=10&mode=ebooks`;
+        const url = `https://openlibrary.org/search.json?q=${query}&mode=ebooks`;
         if (query === '') {
             this.results = [];
         }

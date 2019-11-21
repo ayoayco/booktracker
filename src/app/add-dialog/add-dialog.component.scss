@@ -2,6 +2,10 @@ div#results-wrapper {
     display: none;
 }
 
+input {
+    width: calc(100% - 70px);
+}
+
 .modal {
     top: 0;
     left: 0;
