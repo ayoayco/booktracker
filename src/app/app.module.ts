@@ -23,7 +23,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
     OrderListComponent,
     AddComponent,
     AddDialogComponent,
-    SearchResultComponent
+    SearchResultComponent,
   ],
   imports: [
     HttpClientModule,

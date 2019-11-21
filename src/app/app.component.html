@@ -1,11 +1,15 @@
-<div class="container">
-    <div class="row">
+<div id="app-wrapper">
+    <div>
         <h3>Book Reading Companion</h3>
     </div>
-    <div class="row">
-        <!--app-orders class="col s6"></app-orders>
-        <app-order-list class="col s6"></app-order-list-->
+    <div>
         <app-add (openDialog)="dialogOpened($event)"></app-add>
-        <app-add-dialog (closeDialog)="dialogClosed($event)" [isOpen]="isDialogOpen"></app-add-dialog>
+        <app-search-result
+            (bookSelected)="openBook($event)"
+            [results]="myBooks"></app-search-result>
+        <app-add-dialog
+            (onBookSelected)="addBook($event)"
+            (closeDialog)="dialogClosed($event)"
+            [isOpen]="isDialogOpen"></app-add-dialog>
     </div>
 </div>

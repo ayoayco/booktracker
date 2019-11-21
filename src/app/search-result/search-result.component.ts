@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 export class SearchResultComponent implements OnInit {
     @Input() results = [];
     @Input() isLoading;
+    @Output() bookSelected = new EventEmitter();
+    @Output() dialogClosed = new EventEmitter();
 
     constructor(private http: HttpClient) { }
 
@@ -16,7 +18,8 @@ export class SearchResultComponent implements OnInit {
     }
 
     onBookClick(book) {
-        console.log(book);
+        this.bookSelected.emit(book);
+        this.dialogClosed.emit();
     }
 
 }

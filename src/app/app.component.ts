@@ -8,10 +8,21 @@ import { Component } from '@angular/core';
 export class AppComponent {
     title = 'book-tracker';
     isDialogOpen = false;
+    myBooks;
     dialogOpened() {
         this.isDialogOpen = true;
     }
     dialogClosed() {
         this.isDialogOpen = false;
+    }
+    addBook(book) {
+        if (!this.myBooks) {
+            this.myBooks = [];
+        }
+        this.myBooks.unshift(book);
+        console.log('add', book);
+    }
+    openBook(book) {
+        console.log('open', book);
     }
 }

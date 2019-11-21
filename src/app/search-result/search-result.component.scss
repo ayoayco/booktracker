@@ -6,9 +6,17 @@ div.results-placeholder-wrapper {
     margin: 15px 20px 15px 0;
 }
 
-div.results-placeholder {
+div.results-placeholder,
+div.title-placeholder {
     animation: fading 1.5s infinite;
-    background: black;
+}
+
+div.title-placeholder {
+    width: 110px;
+    height: 15px;
+    margin: 10px auto 0;
+    background-image: linear-gradient(to top right, #ccc, #bbb, #aaa, #ccc);
+    border-radius: 10px;
 }
 
 div.results-item img,
@@ -17,7 +25,7 @@ div.default {
     width: 180px;
     height: 271px;
     object-fit: cover;
-    background-image: linear-gradient(to top right, #111, #222, #222, #111);
+    background-image: linear-gradient(to top right, black, #111, #222, black);
     border-radius: 5px;
 }
 

@@ -10,6 +10,7 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
 
     @Input() isOpen = false;
     @Output() closeDialog = new EventEmitter();
+    @Output() onBookSelected = new EventEmitter();
     @ViewChild('searchField') searchField: ElementRef;
 
     isLoading = false;
@@ -35,6 +36,10 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
 
     onCloseClick() {
         this.closeDialog.emit();
+    }
+
+    bookSelected(book) {
+        this.onBookSelected.emit(book);
     }
 
     search(event: any) {
@@ -93,14 +98,6 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
             () => {
                 this.isLoading = false;
             });
-    }
-
-    private getLargeThumbnail(url: string): string {
-        return url ? url.replace('-S.', '-L.') : '';
-    }
-
-    private getMediumThumbnail(url: string): string {
-        return url ? url.replace('-S.', '-M.') : '';
     }
 
     private getHighRes(url: string, size: string): string {
