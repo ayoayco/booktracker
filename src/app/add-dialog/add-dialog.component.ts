@@ -10,6 +10,8 @@ export class AddDialogComponent implements OnInit {
     @Input() isOpen = false;
     @Output() closeDialog = new EventEmitter();
 
+    previousQuery = '';
+
     constructor() { }
     ngOnInit() {
     }
@@ -24,6 +26,14 @@ export class AddDialogComponent implements OnInit {
 
     onCloseClick() {
         this.closeDialog.emit();
+    }
+
+    search(event: any) {
+        const query = `${encodeURI(event.target.value)}&limit=10&mode=ebooks`;
+        if (query !== this.previousQuery) {
+            console.log(`search: ${query}`);
+            this.previousQuery = query;
+        }
     }
 
 }
