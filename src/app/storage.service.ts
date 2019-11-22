@@ -12,6 +12,10 @@ export class StorageService {
     }
 
     getFromLocalStorage(key: string): any {
-        return JSON.parse(window.localStorage[key]) || undefined;
+        const data = window.localStorage[key];
+        if (data) {
+            return JSON.parse(data) || undefined;
+        }
+        return null;
     }
 }

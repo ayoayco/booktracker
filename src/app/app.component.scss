@@ -2,3 +2,30 @@ div#app-wrapper {
     padding: 24px;
     height: 100%;
 }
+
+div#add-text {
+    margin: 15px;
+    margin-left: -20px;
+    height: 271px;
+    font-size: 70px;
+    padding: 70px 0;
+    font-weight: bold;
+    -webkit-animation: swing 5s infinite;
+    animation: swing 5s infinite;
+    float: left;
+    color: #ccc;
+}
+
+@keyframes swing {
+  0%, 100% {
+    transform: translate(0px, 0);
+  }
+  
+  50% {
+    transform: translate(50px, 0);
+  }
+  
+  80% {
+    transform: translate(0px, 0);
+  }
+}
