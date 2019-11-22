@@ -4,9 +4,9 @@
     </div>
     <div>
         <app-add (openDialog)="dialogOpened($event)"></app-add>
-        <app-search-result
+        <app-book-shelf
             (bookSelected)="openBook($event)"
-            [results]="myBooks"></app-search-result>
+            [results]="myBooks"></app-book-shelf>
         <app-add-dialog
             (onBookSelected)="addBook($event)"
             (closeDialog)="dialogClosed($event)"

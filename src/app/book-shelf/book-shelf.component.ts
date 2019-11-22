@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-    selector: 'app-search-result',
-    templateUrl: './search-result.component.html',
-    styleUrls: ['./search-result.component.scss']
+    selector: 'app-book-shelf',
+    templateUrl: './book-shelf.component.html',
+    styleUrls: ['./book-shelf.component.scss']
 })
-export class SearchResultComponent implements OnInit {
+export class BookShelfComponent implements OnInit {
     @Input() results = [];
     @Input() isLoading;
     @Output() bookSelected = new EventEmitter();

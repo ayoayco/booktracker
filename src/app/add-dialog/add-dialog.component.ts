@@ -36,6 +36,7 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
 
     onCloseClick() {
         this.closeDialog.emit();
+        // this.resetDialog();
     }
 
     bookSelected(book) {
@@ -132,5 +133,10 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
     private getTitleCase(title: string): string {
         // TODO: return title case
         return title;
+    }
+
+    private resetDialog() {
+        this.results = undefined;
+        this.searchField.nativeElement.value = '';
     }
 }

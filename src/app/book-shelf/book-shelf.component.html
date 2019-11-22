@@ -10,8 +10,8 @@
         </div>
     </ng-container>
     <div class="results-item" *ngFor="let book of results">
-        <img (click)="onBookClick(book)" *ngIf="!!book.thumbnailUrl" class="thumbnail pointer" src="{{book.thumbnailUrl}}" alt="{{book.title}} {{book.authors}}" />
-        <div (click)="onBookClick(book)" class="default pointer" *ngIf="!book.thumbnailUrl">
+        <img (click)="onBookClick(book)" *ngIf="!!book.thumbnailUrl" class="thumbnail pointer box-shadow-dreamy" src="{{book.thumbnailUrl}}" alt="{{book.title}} {{book.authors}}" />
+        <div (click)="onBookClick(book)" class="default pointer box-shadow-dreamy" *ngIf="!book.thumbnailUrl">
             <span>{{book.title}}</span>
         </div>
         <div class="book-title ellipsis" title="{{book.title}}">{{book.title}}</div>
