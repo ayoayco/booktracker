@@ -12,6 +12,7 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
     @Output() closeDialog = new EventEmitter();
     @Output() onBookSelected = new EventEmitter();
     @ViewChild('searchField') searchField: ElementRef;
+    @ViewChild('modal') modal: ElementRef;
 
     isLoading = false;
     results = undefined;
@@ -35,7 +36,10 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
     }
 
     onCloseClick() {
-        this.closeDialog.emit();
+        this.modal.nativeElement.scrollTop = 0;
+        setTimeout(() => {
+            this.closeDialog.emit();
+        }, 10);
         // this.resetDialog();
     }
 
