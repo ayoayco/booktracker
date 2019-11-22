@@ -25,13 +25,13 @@ export class AppComponent implements OnInit {
         });
     }
 
-    dialogOpened() {
+    dialogOpened(event: any) {
         this.isDialogOpen = true;
     }
-    dialogClosed() {
+    dialogClosed(event: any) {
         this.isDialogOpen = false;
     }
-    addBook(book) {
+    addBook(book: any) {
         if (!this.myBooks) {
             this.myBooks = [];
         }
@@ -39,11 +39,11 @@ export class AppComponent implements OnInit {
         this.bookService.addBook(book);
         console.log('add', book);
     }
-    openBook(book) {
+    openBook(book: any) {
         console.log('open', book);
         this.openBookDetails = book;
     }
-    closeBook() {
+    closeBook(event: any) {
         this.openBookDetails = undefined;
     }
 }

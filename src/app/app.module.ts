@@ -9,8 +9,6 @@ import { firebaseConfig } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { OrdersComponent } from './orders/orders.component';
-import { OrderListComponent } from './order-list/order-list.component';
 import { OrdersService } from './shared/orders.service';
 import { AddComponent } from './add/add.component';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
@@ -20,8 +18,6 @@ import { BookDetailsComponent } from './book-details/book-details.component';
 @NgModule({
   declarations: [
     AppComponent,
-    OrdersComponent,
-    OrderListComponent,
     AddComponent,
     AddDialogComponent,
     BookShelfComponent,
