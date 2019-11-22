@@ -1,8 +1,5 @@
 <div id="app-wrapper">
     <div>
-        <h3>Book Reading Companion</h3>
-    </div>
-    <div>
         <app-add (openDialog)="dialogOpened($event)"></app-add>
         <div *ngIf="!myBooks || myBooks.length === 0" id="add-text">&larr; Add a book!</div>
         <app-book-shelf

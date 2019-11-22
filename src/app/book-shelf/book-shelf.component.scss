@@ -7,11 +7,13 @@ div.results-placeholder-wrapper {
 }
 
 div.results-placeholder,
-div.title-placeholder {
+div.title-placeholder,
+div.author-placeholder {
     animation: fading 1.5s infinite;
 }
 
-div.title-placeholder {
+div.title-placeholder,
+div.author-placeholder {
     width: 110px;
     height: 15px;
     margin: 10px auto 0;
@@ -43,6 +45,7 @@ div.default {
 div.book-title {
     text-align: center;
     font-weight: bold;
+    font-size: normal;
 }
 div.book-author {
     text-align: center;
@@ -61,4 +64,37 @@ div.book-author {
   100% {
     opacity: .1;
   }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 700px) {
+    div.results-item,
+    div.results-placeholder-wrapper {
+        width: 68.42px;
+        height: 117.5px;
+    }
+
+    div.results-item img,
+    div.results-placeholder,
+    div.default {
+        width: 66.42px;
+        height: 100px;
+        font-size: x-small;
+    }
+
+    div.title-placeholder {
+        width: 56px;
+    }
+
+    div.author-placeholder {
+        display: none;
+    }
+
+    div.book-title {
+        font-size: small;
+    }
+
+    div.book-author {
+        font-size: xx-small;
+    }
+
 }
