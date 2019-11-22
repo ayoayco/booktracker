@@ -14,12 +14,12 @@ export class BookService {
     addBook(data): Promise<any> {
         return this.firestore
             .collection('books')
-            .add(data);
+            .add({...data, timestamp: new Date()});
     }
 
     listBooks(): Observable<DocumentChangeAction<any>[]> {
         return this.firestore
-            .collection('books')
+            .collection('books', ref => ref.orderBy('timestamp', 'desc'))
             .snapshotChanges();
     }
 

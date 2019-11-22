@@ -17,7 +17,7 @@ export class BookDetailsComponent implements OnInit {
 
     delete() {
         this.bookService.deleteBook(this.book);
-        this.closeDetails.emit();
+        setTimeout(() => this.closeDetails.emit(), 10);
     }
 
     onCloseClick() {
