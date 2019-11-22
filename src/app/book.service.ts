@@ -1,17 +1,40 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class BookService {
 
-    constructor() { }
+    constructor(
+        private firestore: AngularFirestore
+    ) { }
+
+    addBook(data): Promise<any> {
+        return this.firestore
+            .collection('books')
+            .add(data);
+    }
+
+    listBooks(): Observable<DocumentChangeAction<any>[]> {
+        return this.firestore
+            .collection('books')
+            .snapshotChanges();
+    }
+
+    deleteBook(book): Promise<void> {
+        return this.firestore
+            .collection('books')
+            .doc(order.payload.doc.id)
+            .delete();
+    }
 
     getHighRes(url: string, size: string): string {
         if (url && url.indexOf('-S.') > -1) {
             return url.replace('-S.', `-${size}.`);
         }
-         if (url && url.indexOf('-M.') > -1) {
+        if (url && url.indexOf('-M.') > -1) {
             return url.replace('-M.', `-${size}.`);
         }
     }

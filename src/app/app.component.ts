@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StorageService } from './storage.service';
+import { BookService } from './book.service';
 
 @Component({
     selector: 'app-root',
@@ -12,13 +12,14 @@ export class AppComponent implements OnInit {
     openBookDetails;
     myBooks;
 
-    constructor(private storage: StorageService) {}
+    constructor(
+        private bookService: BookService
+    ) {}
 
     ngOnInit() {
-        const savedBooks = this.storage.getFromLocalStorage('myBooks');
-        if (savedBooks) {
-            this.myBooks = savedBooks;
-        }
+        this.bookService.listBooks().subscribe(savedBooks => {
+            this.myBooks = savedBooks.map(saved => saved.payload.doc.data());
+        });
     }
 
     dialogOpened() {
@@ -32,7 +33,7 @@ export class AppComponent implements OnInit {
             this.myBooks = [];
         }
         this.myBooks.unshift(book);
-        this.storage.addToLocalStorage('myBooks', this.myBooks);
+        this.bookService.addBook(book);
         console.log('add', book);
     }
     openBook(book) {
