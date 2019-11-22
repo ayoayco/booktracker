@@ -87,7 +87,7 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
                                     authors: this.book.getAuthors(book.author_name),
                                     title: this.book.getTitleCase(book.title),
                                     isbn: book.isbn,
-                                    book,
+                                    book: {...book, ...bookDetails},
                                     thumbnailUrl
                                 });
                             });

@@ -4,5 +4,6 @@
         <span class="close" (click)="onCloseClick()">&times;</span>
         <h1>{{book.title}}</h1>
         <img *ngIf="!!book.thumbnailUrl" class="thumbnail box-shadow-dreamy" src="{{book.thumbnailUrl}}" alt="{{book.title}} {{book.authors}}" />
+        <button (click)="delete()">Delete</button>
     </div>
 </div>

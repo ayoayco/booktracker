@@ -4,7 +4,7 @@
     </div>
     <div>
         <app-add (openDialog)="dialogOpened($event)"></app-add>
-        <div *ngIf="!myBooks" id="add-text">&larr; Add a book!</div>
+        <div *ngIf="!myBooks || myBooks.length === 0" id="add-text">&larr; Add a book!</div>
         <app-book-shelf
             (bookSelected)="openBook($event)"
             [results]="myBooks"></app-book-shelf>

@@ -26,7 +26,7 @@ export class BookService {
     deleteBook(book): Promise<void> {
         return this.firestore
             .collection('books')
-            .doc(order.payload.doc.id)
+            .doc(book.payload.doc.id)
             .delete();
     }
 

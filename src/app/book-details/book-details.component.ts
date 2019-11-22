@@ -15,6 +15,11 @@ export class BookDetailsComponent implements OnInit {
     ngOnInit() {
     }
 
+    delete() {
+        this.bookService.deleteBook(this.book);
+        this.closeDetails.emit();
+    }
+
     onCloseClick() {
         this.closeDetails.emit();
     }

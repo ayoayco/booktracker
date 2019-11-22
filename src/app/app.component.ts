@@ -18,7 +18,10 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.bookService.listBooks().subscribe(savedBooks => {
-            this.myBooks = savedBooks.map(saved => saved.payload.doc.data());
+            this.myBooks = savedBooks.map(saved => ({
+                ...saved.payload.doc.data(),
+                payload: saved.payload
+            }));
         });
     }
 
