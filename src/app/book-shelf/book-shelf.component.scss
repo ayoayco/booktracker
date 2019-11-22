@@ -69,15 +69,16 @@ div.book-author {
 @media only screen and (min-width: 0px) and (max-width: 700px) {
     div.results-item,
     div.results-placeholder-wrapper {
-        width: 68.42px;
-        height: 117.5px;
+        width: 100px;
+        height: 177.5px;
+        margin: 10px 7px 10px 0;
     }
 
     div.results-item img,
     div.results-placeholder,
     div.default {
-        width: 66.42px;
-        height: 100px;
+        width: 100px;
+        height: 150px;
         font-size: x-small;
     }
 
