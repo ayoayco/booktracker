@@ -1,5 +1,6 @@
 <div id="app-wrapper">
-    <div>
+    <app-home *ngIf="!isLoggedIn"></app-home>
+    <div *ngIf="isLoggedIn">
         <app-add (openDialog)="dialogOpened($event)"></app-add>
         <div *ngIf="!myBooks || myBooks.length === 0" id="add-text">&larr; Add a book!</div>
         <app-book-shelf
@@ -11,6 +12,7 @@
             [isOpen]="isDialogOpen"></app-add-dialog>
         <app-book-details
             (closeDetails)="closeBook($event)"
+            (deleteBook)="deleteBook($event)"
             [book]="openBookDetails"></app-book-details>
     </div>
 </div>

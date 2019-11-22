@@ -9,6 +9,7 @@ import { BookService } from '../book.service';
 export class BookDetailsComponent implements OnInit {
     @Input() book;
     @Output() closeDetails = new EventEmitter();
+    @Output() deleteBook = new EventEmitter();
 
     constructor(private bookService: BookService) { }
 
@@ -16,7 +17,7 @@ export class BookDetailsComponent implements OnInit {
     }
 
     delete() {
-        this.bookService.deleteBook(this.book);
+        this.deleteBook.emit(this.book);
         setTimeout(() => this.closeDetails.emit(), 10);
     }
 
@@ -30,6 +31,11 @@ export class BookDetailsComponent implements OnInit {
             display = 'block';
         }
         return display;
+    }
+
+    getInfoUrl(book: any) {
+        const url = book.book[`ISBN:${book.isbn}`].info_url;
+        return url;
     }
 
 }

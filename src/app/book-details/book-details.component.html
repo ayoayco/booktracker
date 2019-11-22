@@ -1,9 +1,16 @@
 <div #modal *ngIf="book !== undefined" id="myModal" class="modal" [style.display]="getDisplay()">
     <!-- Modal content -->
     <div class="modal-content">
-        <span class="close" (click)="onCloseClick()">&times;</span>
+        <a href="#" class="back pointer" (click)="onCloseClick()">Back</a>
         <h1>{{book.title}}</h1>
         <img *ngIf="!!book.thumbnailUrl" class="thumbnail box-shadow-dreamy" src="{{book.thumbnailUrl}}" alt="{{book.title}} {{book.authors}}" />
-        <button (click)="delete()">Delete</button>
+        <ul>
+            <li>
+                <a target="_blank" href="{{getInfoUrl(book)}}">Info</a>
+            </li>
+            <li>
+                <a href="#" (click)="delete()">Delete</a>
+            </li>
+        </ul>
     </div>
 </div>

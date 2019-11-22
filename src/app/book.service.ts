@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { AsyncSubject, Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -14,13 +14,24 @@ export class BookService {
     addBook(data): Promise<any> {
         return this.firestore
             .collection('books')
-            .add({...data, timestamp: new Date()});
+            .doc(data.isbn)
+            .set({...data, timestamp: new Date()});
     }
 
     listBooks(): Observable<DocumentChangeAction<any>[]> {
         return this.firestore
             .collection('books', ref => ref.orderBy('timestamp', 'desc'))
             .snapshotChanges();
+    }
+
+    getBook(book: any) {
+        const retSubject = new AsyncSubject<any>();
+        this.listBooks()
+            .subscribe(books => {
+                const savedBook = books.filter(bookItem => bookItem.payload.doc.data().isbn === book.isbn);
+                retSubject.next(savedBook);
+            });
+        return retSubject;
     }
 
     deleteBook(book): Promise<void> {

@@ -14,6 +14,7 @@ import { AddComponent } from './add/add.component';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { BookShelfComponent } from './book-shelf/book-shelf.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { BookDetailsComponent } from './book-details/book-details.component';
     AddDialogComponent,
     BookShelfComponent,
     BookDetailsComponent,
+    HomeComponent,
   ],
   imports: [
     HttpClientModule,

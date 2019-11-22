@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from './book.service';
+import { LibraryService } from './library.service';
 
 @Component({
     selector: 'app-root',
@@ -8,16 +9,18 @@ import { BookService } from './book.service';
 })
 export class AppComponent implements OnInit {
     title = 'book-tracker';
+    isLoggedIn = true;
     isDialogOpen = false;
     openBookDetails;
     myBooks;
 
     constructor(
+        private libraryService: LibraryService,
         private bookService: BookService
     ) {}
 
     ngOnInit() {
-        this.bookService.listBooks().subscribe(savedBooks => {
+        this.libraryService.listBooks('ayoayco').subscribe(savedBooks => {
             this.myBooks = savedBooks.map(saved => ({
                 ...saved.payload.doc.data(),
                 payload: saved.payload
@@ -36,8 +39,12 @@ export class AppComponent implements OnInit {
             this.myBooks = [];
         }
         this.myBooks.unshift(book);
+        this.libraryService.addToLibrary('ayoayco', book);
         this.bookService.addBook(book);
         console.log('add', book);
+    }
+    deleteBook(book: any) {
+        this.libraryService.removeFromLibrary('ayoayco', book);
     }
     openBook(book: any) {
         console.log('open', book);
@@ -45,5 +52,8 @@ export class AppComponent implements OnInit {
     }
     closeBook(event: any) {
         this.openBookDetails = undefined;
+    }
+    login(event: any) {
+        this.isLoggedIn = true;
     }
 }
