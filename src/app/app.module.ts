@@ -15,6 +15,7 @@ import { OrdersService } from './shared/orders.service';
 import { AddComponent } from './add/add.component';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { BookShelfComponent } from './book-shelf/book-shelf.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { BookShelfComponent } from './book-shelf/book-shelf.component';
     AddComponent,
     AddDialogComponent,
     BookShelfComponent,
+    BookDetailsComponent,
   ],
   imports: [
     HttpClientModule,

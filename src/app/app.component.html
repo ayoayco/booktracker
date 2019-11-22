@@ -12,5 +12,8 @@
             (onBookSelected)="addBook($event)"
             (closeDialog)="dialogClosed($event)"
             [isOpen]="isDialogOpen"></app-add-dialog>
+        <app-book-details
+            (closeDetails)="closeBook($event)"
+            [book]="openBookDetails"></app-book-details>
     </div>
 </div>

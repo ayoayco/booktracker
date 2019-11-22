@@ -1,0 +1,33 @@
+img.thumbnail {
+    width: 180px;
+    height: 271px;
+    object-fit: cover;
+    background-image: linear-gradient(to top right, black, #111, #222, black);
+    border-radius: 5px;
+}
+
+.modal {
+    top: 0;
+    left: 0;
+    height: 100% !important;
+    max-height: 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: #333;
+    color: white;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

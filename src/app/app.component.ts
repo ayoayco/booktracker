@@ -9,6 +9,7 @@ import { StorageService } from './storage.service';
 export class AppComponent implements OnInit {
     title = 'book-tracker';
     isDialogOpen = false;
+    openBookDetails;
     myBooks;
 
     constructor(private storage: StorageService) {}
@@ -36,5 +37,9 @@ export class AppComponent implements OnInit {
     }
     openBook(book) {
         console.log('open', book);
+        this.openBookDetails = book;
+    }
+    closeBook() {
+        this.openBookDetails = undefined;
     }
 }

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BookService } from '../book.service';
 
 @Component({
     selector: 'app-add-dialog',
@@ -19,12 +20,14 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
     previousQuery = '';
     previousSubscription;
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private book: BookService
+    ) { }
     ngOnInit() {
     }
 
     ngAfterViewInit() {
-        this.searchField.nativeElement.focus();
     }
 
     getDisplay() {
@@ -79,10 +82,10 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
                             const url2 = `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json`;
                             this.http.get(url2).subscribe((bookDetails: any) => {
                                 const details = bookDetails[`ISBN:${isbn}`];
-                                thumbnailUrl = this.getHighRes(details.thumbnail_url, 'M');
+                                thumbnailUrl = this.book.getHighRes(details.thumbnail_url, 'M');
                                 returnResults.push({
-                                    authors: this.getAuthors(book.author_name),
-                                    title: this.getTitleCase(book.title),
+                                    authors: this.book.getAuthors(book.author_name),
+                                    title: this.book.getTitleCase(book.title),
                                     isbn: book.isbn,
                                     book,
                                     thumbnailUrl
@@ -103,40 +106,6 @@ export class AddDialogComponent implements AfterViewInit, OnInit {
             () => {
                 this.isLoading = false;
             });
-    }
-
-    private getHighRes(url: string, size: string): string {
-        return url ? url.replace('-S.', `-${size}.`) : '';
-    }
-
-    private getAuthors(authors) {
-        let authorString = '';
-
-        if (!authors) {
-            return '';
-        }
-
-        if (authors.length === 1) {
-            authorString = authors[0];
-        }
-
-        if (authors.length > 1) {
-            for (let i = 0; i < authors.length; i++) {
-                authorString += authors[i];
-                if (i <= authors.length - 2) {
-                    authorString += ', ';
-                }
-                if (i === authors.length - 2) {
-                    authorString += 'and ';
-                }
-            }
-        }
-        return authors ? authorString : ``;
-    }
-
-    private getTitleCase(title: string): string {
-        // TODO: return title case
-        return title;
     }
 
     private resetDialog() {
