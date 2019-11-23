@@ -1,6 +1,7 @@
 <div id="app-wrapper">
-    <app-home *ngIf="!isLoggedIn"></app-home>
-    <div *ngIf="isLoggedIn">
+    <app-home *ngIf="!(authenticationService.user$ | async)?.uid" (login)="login($event)"></app-home>
+    <div *ngIf="(authenticationService.user$ | async)?.uid">
+        <button (click)="logout()">Logout</button>
         <app-add (openDialog)="dialogOpened($event)"></app-add>
         <div *ngIf="!myBooks || myBooks.length === 0" id="add-text">&larr; Add a book!</div>
         <app-book-shelf

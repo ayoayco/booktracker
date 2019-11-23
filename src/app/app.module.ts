@@ -15,6 +15,8 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { BookShelfComponent } from './book-shelf/book-shelf.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { HomeComponent } from './home/home.component';
+import { AuthenticationService } from './authentication.service';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -31,10 +33,12 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [
-    OrdersService
+    OrdersService,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })
