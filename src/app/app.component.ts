@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.authenticationService.user$.subscribe(user => {
-            this.userId = user.uid;
+            this.userId = user ? user.uid : undefined;
             this.subscribeBooksList();
         });
     }
@@ -76,14 +76,17 @@ export class AppComponent implements OnInit, OnDestroy {
     login(user: any) {
         console.log('User logged in.');
         user.subscribe(u => {
-            this.userId = u.uid;
+            this.userId = u ? u.uid : undefined;
             this.subscribeBooksList();
         });
         this.channgeDetector.detectChanges();
     }
     logout() {
         this.authenticationService.logout()
-            .then(() => console.log('User logged out.'))
+            .then(() => {
+                this.myBooks = undefined;
+                console.log('User logged out.');
+            })
             .catch(err => console.error(err));
     }
 }
